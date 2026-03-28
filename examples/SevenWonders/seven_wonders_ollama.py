@@ -17,7 +17,8 @@ dataset = load_dataset("bilgeyucel/seven-wonders", split="train")
 docs = [Document(content=doc["content"], meta=doc["meta"]) for doc in dataset]
 
 EMBEDDING_MODEL_NAME="bge-m3"
-MODEL_NAME="qwen3.5:9b"
+MODEL_NAME="qwen3.5"
+MODEL_NAME="ministral-3:3b"
 OLLAMA_BASE_URL="http://localhost:11434"
 
 doc_embedder = OllamaDocumentEmbedder(
@@ -68,9 +69,7 @@ basic_rag_pipeline.add_component("prompt_builder", prompt_builder)
 basic_rag_pipeline.add_component("llm", generator)
 
 # Now, connect the components to each other
-basic_rag_pipeline.connect(
-    "text_embedder.embedding", "retriever.query_embedding"
-)
+basic_rag_pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
 basic_rag_pipeline.connect("retriever", "prompt_builder.documents")
 basic_rag_pipeline.connect("prompt_builder", "llm")
 
@@ -81,4 +80,4 @@ results = basic_rag_pipeline.run({
     "prompt_builder": {"question": question}
 })
 
-print(response["llm"]["replies"][0])
+print(results["llm"]["replies"][0])
