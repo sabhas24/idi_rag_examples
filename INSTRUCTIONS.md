@@ -81,7 +81,7 @@ if not url_encontrada:
 
 El proyecto utiliza un sistema de configuración unificado. Una vez obtenida la URL desde Google Colab, siga este procedimiento:
 
-1.  Localice el archivo [`.env`](file:///home/pablo/RAG/idi_rag_examples/.env) en el directorio raíz del proyecto.
+1.  Localice el archivo [`.env`] en el directorio raíz del proyecto.
 2.  Actualice la variable `OLLAMA_BASE_URL` con la dirección obtenida en el paso anterior.
 
 > [!Observacion]
